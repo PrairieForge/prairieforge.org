@@ -6,9 +6,9 @@ import { Resend } from "resend";
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
+// TODO: Clean up imports?
 // Get constants from .env file. Must set .env variables on deployment servers as well.
-const RESEND_SEGMENT_KEY = import.meta.env.RESEND_SEGMENT_KEY;
-const RESEND_FROM = import.meta.env.RESEND_FROM;
+const { RESEND_SEGMENT_KEY, RESEND_FROM } = import.meta.env;
 
 // JSON.parse to handle string to object conversion
 const RESEND_TOPICS = JSON.parse(import.meta.env.RESEND_TOPICS);
@@ -16,66 +16,63 @@ const RESEND_WEBHOOK_SECRET = import.meta.env.DEV
 	? import.meta.env.RESEND_WEBHOOK_SECRET_DEV
 	: import.meta.env.RESEND_WEBHOOK_SECRET_PROD;
 
-// sleep function to space out calls to resend api
-const sleep = (ms: number) => {
+// Util pause function to space out calls to resend api
+const pause = (ms: number) => {
 	return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
 export const POST: APIRoute = async ({ request }) => {
 	try {
+		// Verify webhook: https://resend.com/docs/dashboard/webhooks/verify-webhooks-requests
 		const payload = await request.text();
 
-		// BUG: Fix hacky solutions
 		const event = resend.webhooks.verify({
 			payload,
 			headers: {
-				id: request.headers.get("svix-id"),
-				timestamp: request.headers.get("svix-timestamp"),
-				signature: request.headers.get("svix-signature"),
+				id: request.headers.get("svix-id") || "",
+				timestamp: request.headers.get("svix-timestamp") || "",
+				signature: request.headers.get("svix-signature") || "",
 			},
 			webhookSecret: RESEND_WEBHOOK_SECRET,
 		});
 
-		console.log(event);
-
+		// FIX: Type unkown
+		// Check if event is email.received and return if false
 		if (event.type !== "email.received")
-			return new Response("This endpoint is for email.received only.", {
-				status: 400,
+			return new Response("This endpoint is for `email.received` only.", {
+				status: 200,
 			});
 
-		// Get email data
+		// FIX: Type unkown
+		// Get email, including html body, since webhooks do not contain this data: https://resend.com/docs/dashboard/receiving/forward-emails
 		const { data: email, error: emailError } =
 			await resend.emails.receiving.get(event.data.email_id);
-
 		if (emailError) throw new Error(emailError.message);
 
 		// Resend limits requests to 2 per second
-		await sleep(1000);
+		await pause(1000);
 
-		// Get sender segments
-		const { data: segments, error: segmentsError } =
-			await resend.contacts.segments.list({
-				email: email.from,
-			});
+		// Check that contact is authorized sender. Must have property authorized_sender set to 'true'
+		const { data: contact, error: contactError } = await resend.contacts.get({
+			email: email.from,
+		});
+		if (contactError) throw new Error(contactError.message);
 
-		if (segmentsError) throw new Error(segmentsError.message);
-
-		// Use regex to check if sender is in Authorized Senders segment
-		const segmentsString = JSON.stringify(segments);
-		if (!/Authorized Senders/.test(segmentsString)) {
-			return new Response(null, {
-				status: 422,
-				statusText: "You are not part of the Authorized Senders segment!",
-			});
-		}
+		const authorized =
+			contact.properties.authorized_sender &&
+			contact.properties.authorized_sender.value === "true";
+		if (!authorized)
+			return new Response("Unauthorized sender!", { status: 200 });
 
 		// Get topic ID from target email
-		console.log(email.to);
+		// IDs are stored in object in .env in the form {'key': 'id'}
+		// Uses bracket notation to look up value by key
+		// e.g. myTopic@example.com would return the id for Resend Topic 'myTopic' if it exists
 		const topicId = RESEND_TOPICS[email.to[0].split("@")[0]];
-		if (!topicId) throw new Error("Invalid topic");
+		if (!topicId) return new Response("Invalid topicId!", { status: 200 });
 
 		// Create broadcast email
-		const { data: broadcast, error: broadcastError } =
+		const { data: broadcast, error: createBroadcastError } =
 			await resend.broadcasts.create({
 				segmentId: RESEND_SEGMENT_KEY,
 				topicId,
@@ -85,19 +82,24 @@ export const POST: APIRoute = async ({ request }) => {
 				replyTo: email?.from,
 				name: `${email.subject} (${email?.from})`,
 			});
-
-		if (broadcastError) throw new Error(broadcastError.message);
+		if (createBroadcastError) throw new Error(createBroadcastError.message);
 
 		// Resend limits requests to 2 per second
-		await sleep(1000);
+		await pause(1000);
 
 		// Send broadcast email
-		const { error } = await resend.broadcasts.send(broadcast.id);
+		const { error: sendBroadcastError } = await resend.broadcasts.send(
+			broadcast.id,
+		);
+		if (sendBroadcastError) throw new Error(sendBroadcastError.message);
 
-		if (error) throw new Error(error.message);
+		// Return 200 if all was completed successfully
 		return new Response("Success!", { status: 200 });
 	} catch (error) {
 		console.error(error);
-		return new Response("Failure!", { status: 400 });
+		if (typeof error === "string") {
+			return new Response(error, { status: 400 });
+		}
+		return new Response("Unknown Failure!", { status: 400 });
 	}
 };
