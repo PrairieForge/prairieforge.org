@@ -2,7 +2,7 @@
 
 backend:
   name: github
-  repo: PrairieForge/website
+  repo: PrairieForge/prairieforge.org
 
 media_folder: /public/media
 public_folder: /media
