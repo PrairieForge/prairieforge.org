@@ -70,8 +70,8 @@ export default defineConfig({
           topics: [
             {
               topicName: "CST Minneapolis Announcements",
-              topicIdentifier: "ce78aed9-15ca-4238-9382-e2bdf6be5dee",
-              topicId: "news",
+              topicIdentifier: "news",
+              topicId: "ce78aed9-15ca-4238-9382-e2bdf6be5dee",
             },
           ],
         },
