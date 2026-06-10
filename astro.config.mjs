@@ -78,7 +78,7 @@ export default defineConfig({
         {
           segmentName: "Resend TEST Group",
           segmentIdentifier: "test",
-          segmentId: "9556aa8a-a099-47c5-b126-6806d8467932",
+          segmentId: "358c0735-ad71-4a0f-8971-a3fa1b529dd6",
           sendFromEmail: {
             name: "RESEND TEST",
             email: "hello@updates.prairieforge.org",
