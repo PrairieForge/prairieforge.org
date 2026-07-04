@@ -16,8 +16,8 @@ import { internshipBenefits, internshipDescription } from "#/data/strategy";
 import Layout from "#/layouts/Layout.astro";
 
 const { description, date, location, url } = meetings.frontmatter;
-// Astro adds 'Z' to unmarked timestamp; so slice strips Z back out for parsing.
-const parsedDate = format(new Date(date.slice(0, -1)), "MMMM do 'at' p");
+
+const parsedDate = format(new Date(date), "MMMM do 'at' p");
 ---
 
 <Layout>
