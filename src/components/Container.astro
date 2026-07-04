@@ -1,37 +1,37 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLAttributes } from 'astro/types';
 
 const widths = {
-  base: "mx-auto w-[90%] max-w-(--width-base)",
-  wide: "mx-auto w-[90%] max-w-(--width-wide)",
+	base: 'mx-auto w-[90%] max-w-(--width-base)',
+	wide: 'mx-auto w-[90%] max-w-(--width-wide)',
 };
 
 const variants = {
-  default:
-    "relative flex min-h-[50svh] scroll-mt-nav flex-col gap-md pb-lg md:min-h-svh justify-center",
-  hero: "pt-lg ",
-  end: "flex scroll-mt-nav flex-col gap-lg pb-lg",
+	default:
+		'relative flex min-h-[50svh] scroll-mt-nav flex-col gap-md pb-lg md:min-h-svh justify-center',
+	hero: 'pt-lg ',
+	end: 'flex scroll-mt-nav flex-col gap-lg pb-lg',
 };
 
 type Width = keyof typeof widths;
 type Variant = keyof typeof variants;
 
-interface Props extends HTMLAttributes<"div"> {
-  as: "div" | "section" | "article";
-  width?: Width;
-  variant?: Variant;
-  class?: string;
+interface Props extends HTMLAttributes<'div'> {
+	as: 'div' | 'section' | 'article';
+	width?: Width;
+	variant?: Variant;
+	class?: string;
 }
 
 const {
-  as: As = "div",
-  width = "base",
-  variant = "default",
-  class: className,
-  ...attrs
+	as: As = 'div',
+	width = 'base',
+	variant = 'default',
+	class: className,
+	...attrs
 } = Astro.props as Props;
 ---
 
 <As class:list={[widths[width], variants[variant], className]} {...attrs}>
-  <slot />
+	<slot />
 </As>

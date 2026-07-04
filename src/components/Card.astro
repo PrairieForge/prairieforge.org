@@ -1,25 +1,23 @@
 ---
-import { type AstroComponent } from "@lucide/astro";
+import type { AstroComponent } from '@lucide/astro';
 
 import {
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardMedia,
-  Card as CardRoot,
-  CardTitle,
-} from "#/components/ui/card";
+	CardContent,
+	CardHeader,
+	CardMedia,
+	Card as CardRoot,
+	CardTitle,
+} from '#/components/ui/card';
 
 interface Props {
-  item: {
-    id: string;
-    icon: AstroComponent;
-    prefix?: string;
-    title: string;
-    description: string;
-  };
-  index: number;
+	item: {
+		id: string;
+		icon: AstroComponent;
+		prefix?: string;
+		title: string;
+		description: string;
+	};
+	index: number;
 }
 
 const { item, index } = Astro.props;
@@ -28,27 +26,25 @@ const isEven = index % 2 === 1;
 ---
 
 <CardRoot
-  class:list={[
+	class:list={[
     isEven
       ? "bg-[color-mix(in_srgb,var(--color-background)_30%,var(--color-muted))]"
       : "bg-[color-mix(in_srgb,var(--color-background)_90%,var(--color-muted))]",
     "transition-all duration-200 ease-out hover:-translate-y-0.5 hover:scale-[1.015] hover:shadow-md",
   ]}
 >
-  <CardHeader class={`flex gap-4 items-center`}>
-    <CardMedia class="bg-secondary/10 flex items-center justify-center p-2">
-      <Icon />
-    </CardMedia>
-    <CardTitle class="flex flex-col">
-      {
-        item.prefix && (
+	<CardHeader class={'flex gap-4 items-center'}>
+		<CardMedia class="bg-secondary/10 flex items-center justify-center p-2">
+			<Icon />
+		</CardMedia>
+		<CardTitle class="flex flex-col">
+			{item.prefix && (
           <span class="text-secondary/60 text-base">{item.prefix}</span>
-        )
-      }
-      <span class="font-bold">{item.title}</span>
-    </CardTitle>
-  </CardHeader>
-  <CardContent class="text-foreground/50">
-    {item.description}
-  </CardContent>
+        )}
+			<span class="font-bold">{item.title}</span>
+		</CardTitle>
+	</CardHeader>
+	<CardContent class="text-foreground/50">
+		{item.description}
+	</CardContent>
 </CardRoot>

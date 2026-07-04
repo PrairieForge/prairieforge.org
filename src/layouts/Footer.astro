@@ -1,17 +1,16 @@
 ---
-import { Image } from "astro:assets";
+import { Image } from 'astro:assets';
 
-import blacksmithImg from "#/assets/blacksmith.webp";
-import Text from "#/components/Text.astro";
-import { navItems } from "#/data/nav";
+import blacksmithImg from '#/assets/blacksmith.webp';
+import Text from '#/components/Text.astro';
+import { navItems } from '#/data/nav';
 ---
 
 <div
-  class="pt-lg mx-auto flex w-[90%] max-w-(--width-base) items-end justify-between"
+	class="pt-lg mx-auto flex w-[90%] max-w-(--width-base) items-end justify-between"
 >
-  <ul class="flex flex-col gap-2 pb-4 text-base">
-    {
-      navItems.map((item) => (
+	<ul class="flex flex-col gap-2 pb-4 text-base">
+		{navItems.map((item) => (
         <>
           <li>
             <Text
@@ -38,9 +37,8 @@ import { navItems } from "#/data/nav";
             )}
           </li>
         </>
-      ))
-    }
-  </ul>
+      ))}
+	</ul>
 
-  <Image src={blacksmithImg} alt={"blacksmith"} class={"size-40 sm:size-80"} />
+	<Image src={blacksmithImg} alt={"blacksmith"} class={"size-40 sm:size-80"} />
 </div>

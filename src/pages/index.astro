@@ -1,142 +1,143 @@
 ---
-import { Image } from "astro:assets";
+import { Image } from 'astro:assets';
+import { MoveDown, MoveRight } from '@lucide/astro';
 
-import { MoveDown, MoveRight } from "@lucide/astro";
-
-import bgPlants from "#/assets/bg-plants.webp";
-import bgRoots from "#/assets/bg-roots.webp";
-import Card from "#/components/Card.astro";
-import Container from "#/components/Container.astro";
-import Text from "#/components/Text.astro";
-import { Button } from "#/components/ui/button";
-import { priorities } from "#/data/home";
-import Layout from "#/layouts/Layout.astro";
+import bgPlants from '#/assets/bg-plants.webp';
+import bgRoots from '#/assets/bg-roots.webp';
+import Card from '#/components/Card.astro';
+import Container from '#/components/Container.astro';
+import Text from '#/components/Text.astro';
+import { Button } from '#/components/ui/button';
+import { priorities } from '#/data/home';
+import Layout from '#/layouts/Layout.astro';
 ---
 
 <Layout>
-  <!-- BG Light -->
-  <div class="bg-foreground">
-    <Container as="section" width="wide" variant="hero">
-      <Text as="h1" variant="hero">The Prairie Forge Initiative</Text>
-    </Container>
-    <Image
-      src={bgPlants}
-      alt={"background image of prairiegrass plants"}
-      priority
-    />
-  </div>
+	<!-- BG Light -->
+	<div class="bg-foreground">
+		<Container as="section" width="wide" variant="hero">
+			<Text as="h1" variant="hero">The Prairie Forge Initiative</Text>
+		</Container>
+		<Image
+			src={bgPlants}
+			alt={"background image of prairiegrass plants"}
+			priority
+		/>
+	</div>
 
-  <!-- BG Dark -->
-  <Image
-    src={bgRoots}
-    alt={"background image of prairiegrass roots"}
-    priority
-  />
+	<!-- BG Dark -->
+	<Image
+		src={bgRoots}
+		alt={"background image of prairiegrass roots"}
+		priority
+	/>
 
-  <Container as="section">
-    <Text
-      as={"h2"}
-      variant={"subheading"}
-      id="vision"
-      class="scroll-mt-nav pt-lg"
-    >
-      Planting the gospel deep in the soil of Southern Minnesota over the next
-      hundred years.
-    </Text>
-    <Button
-      variant={"link"}
-      class="text-primary bounce-down w-fit self-center"
-      as="a"
-      href="/#vision-2">Find out how. <MoveDown /></Button
-    >
-  </Container>
+	<Container as="section">
+		<Text
+			as={"h2"}
+			variant={"subheading"}
+			id="vision"
+			class="scroll-mt-nav pt-lg"
+		>
+			Planting the gospel deep in the soil of Southern Minnesota over the next
+			hundred years.
+		</Text>
+		<Button
+			variant={"link"}
+			class="text-primary bounce-down w-fit self-center"
+			as="a"
+			href="/#vision-2"
+			>Find out how. <MoveDown /></Button
+		>
+	</Container>
 
-  <Container as="section">
-    <Text
-      as={"h2"}
-      variant={"subheading"}
-      id="vision-2"
-      class="scroll-mt-nav pt-lg">Jesus was unstrategic</Text
-    >
-    <p class="text-secondary">
-      He came to the sound of angels singing and then spent the next thirty
-      years learning carpentry. Even during his public ministry, he spent most
-      of his time going at a slow pace in a small place. This is unstrategic not
-      because there was no plan, but because the plan doesn’t make sense! Yet
-      the madness of this plan is exactly how God chose to display the
-      upside-down nature of his Kingdom. Jesus won by dying. Jesus chose two
-      women to witness the resurrection. Jesus built his church on the preaching
-      of one of his betrayers. Jesus' plan is beautiful—but mad.
-    </p>
-    <Button
-      variant={"link"}
-      class="text-primary bounce-down w-fit self-center"
-      as="a"
-      href="/#vision-3">Trusting him takes imagination. <MoveDown /></Button
-    >
-  </Container>
+	<Container as="section">
+		<Text
+			as={"h2"}
+			variant={"subheading"}
+			id="vision-2"
+			class="scroll-mt-nav pt-lg"
+			>Jesus was unstrategic</Text
+		>
+		<p class="text-secondary">
+			He came to the sound of angels singing and then spent the next thirty
+			years learning carpentry. Even during his public ministry, he spent most
+			of his time going at a slow pace in a small place. This is unstrategic not
+			because there was no plan, but because the plan doesn’t make sense! Yet
+			the madness of this plan is exactly how God chose to display the
+			upside-down nature of his Kingdom. Jesus won by dying. Jesus chose two
+			women to witness the resurrection. Jesus built his church on the preaching
+			of one of his betrayers. Jesus' plan is beautiful—but mad.
+		</p>
+		<Button
+			variant={"link"}
+			class="text-primary bounce-down w-fit self-center"
+			as="a"
+			href="/#vision-3"
+			>Trusting him takes imagination. <MoveDown /></Button
+		>
+	</Container>
 
-  <Container as="section">
-    <Text
-      as={"h2"}
-      variant={"subheading"}
-      id="vision-3"
-      class="scroll-mt-nav pt-lg">Many view rural ministry as unstrategic</Text
-    >
-    <p class="text-secondary">
-      Yet we believe rural ministry presents a unique opportunity to display the
-      very upside-down gospel we proclaim. Going at a slow pace in a small place
-      as we win by dying embodies the gospel logic of John 12:24: “Truly, truly,
-      I say to you, unless a grain of wheat falls into the earth and dies, it
-      remains alone; but if it dies, it bears much fruit." The slowness and
-      smallness of this kind of ministry requires a certain kind of gospel
-      imaginary from those who pastor here. It’s the kind of imaginary Wendell
-      Berry calls for in his poem Manifesto: The Mad Farmer Liberation Front:
-    </p>
-    <p class="pl-8">
-      So, friends, every day do something<br />that won’t compute....<br
-      />Invest in the millennium. Plant sequoias.<br />Say that your main crop
-      is the forest<br />that you did not plant,<br />that you will not live to
-      harvest.
-    </p>
-    <p class="text-secondary">
-      We’ve caught this madness. And out of this gospel madness flows...
-    </p>
-    <Button
-      variant={"link"}
-      class="text-primary bounce-down w-fit self-center"
-      as="a"
-      href="/#vision-4">Our 100 year vision. <MoveDown /></Button
-    >
-  </Container>
+	<Container as="section">
+		<Text
+			as={"h2"}
+			variant={"subheading"}
+			id="vision-3"
+			class="scroll-mt-nav pt-lg"
+			>Many view rural ministry as unstrategic</Text
+		>
+		<p class="text-secondary">
+			Yet we believe rural ministry presents a unique opportunity to display the
+			very upside-down gospel we proclaim. Going at a slow pace in a small place
+			as we win by dying embodies the gospel logic of John 12:24: “Truly, truly,
+			I say to you, unless a grain of wheat falls into the earth and dies, it
+			remains alone; but if it dies, it bears much fruit." The slowness and
+			smallness of this kind of ministry requires a certain kind of gospel
+			imaginary from those who pastor here. It’s the kind of imaginary Wendell
+			Berry calls for in his poem Manifesto: The Mad Farmer Liberation Front:
+		</p>
+		<p class="pl-8">
+			So, friends, every day do something<br>that won’t compute....<br>Invest in
+			the millennium. Plant sequoias.<br>Say that your main crop is the forest<br>that
+			you did not plant,<br>that you will not live to harvest.
+		</p>
+		<p class="text-secondary">
+			We’ve caught this madness. And out of this gospel madness flows...
+		</p>
+		<Button
+			variant={"link"}
+			class="text-primary bounce-down w-fit self-center"
+			as="a"
+			href="/#vision-4"
+			>Our 100 year vision. <MoveDown /></Button
+		>
+	</Container>
 
-  <!-- BG Muted -->
-  <div class="bg-muted">
-    <Container as="section" variant="end">
-      <Text
-        as="h2"
-        variant={"subheading"}
-        id="vision-4"
-        class="scroll-mt-nav pt-lg"
-      >
-        Over the next 100 years, we aim to start and strengthen churches in
-        Southern MN that share a <span class="text-primary">
-          Gospel Imaginary.
-        </span>
-      </Text>
-      <div class="flex flex-col gap-4">
-        {priorities.map((item, index) => <Card {item} {index} />)}
-      </div>
+	<!-- BG Muted -->
+	<div class="bg-muted">
+		<Container as="section" variant="end">
+			<Text
+				as="h2"
+				variant={"subheading"}
+				id="vision-4"
+				class="scroll-mt-nav pt-lg"
+			>
+				Over the next 100 years, we aim to start and strengthen churches in
+				Southern MN that share a
+				<span class="text-primary"> Gospel Imaginary. </span>
+			</Text>
+			<div class="flex flex-col gap-4">
+				{priorities.map((item, index) => <Card {item} {index} />)}
+			</div>
 
-      <Button
-        as="a"
-        href={"/about/#join"}
-        class={"text-2xl items-center font-sans tracking-wide gap-4 flex-wrap h-fit py-2 text-wrap"}
-        size={"lg"}
-        ><span class="text-wrap">Join us in this mission</span><MoveRight
-          class="size-8"
-        /></Button
-      >
-    </Container>
-  </div>
+			<Button
+				as="a"
+				href={"/about/#join"}
+				class={"text-2xl items-center font-sans tracking-wide gap-4 flex-wrap h-fit py-2 text-wrap"}
+				size={"lg"}
+				><span class="text-wrap">Join us in this mission</span>
+				<MoveRight class="size-8" /></Button
+			>
+		</Container>
+	</div>
 </Layout>

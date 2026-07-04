@@ -1,19 +1,18 @@
 ---
-import { Image } from "astro:assets";
+import { Image } from 'astro:assets';
+import { format } from 'date-fns';
 
-import { format } from "date-fns";
-
-import bgPlants from "#/assets/bg-plants.webp";
-import bgRoots from "#/assets/bg-roots.webp";
-import eventImg from "#/assets/event.webp";
-import fellowshipImg from "#/assets/fellowship.webp";
-import internshipImg from "#/assets/internship.webp";
-import Card from "#/components/Card.astro";
-import Container from "#/components/Container.astro";
-import Text from "#/components/Text.astro";
-import * as meetings from "#/data/meetings.md";
-import { internshipBenefits, internshipDescription } from "#/data/strategy";
-import Layout from "#/layouts/Layout.astro";
+import bgPlants from '#/assets/bg-plants.webp';
+import bgRoots from '#/assets/bg-roots.webp';
+import eventImg from '#/assets/event.webp';
+import fellowshipImg from '#/assets/fellowship.webp';
+import internshipImg from '#/assets/internship.webp';
+import Card from '#/components/Card.astro';
+import Container from '#/components/Container.astro';
+import Text from '#/components/Text.astro';
+import * as meetings from '#/data/meetings.md';
+import { internshipBenefits, internshipDescription } from '#/data/strategy';
+import Layout from '#/layouts/Layout.astro';
 
 const { description, date, location, url } = meetings.frontmatter;
 
@@ -21,180 +20,172 @@ const parsedDate = format(new Date(date), "MMMM do 'at' p");
 ---
 
 <Layout>
-  <!-- BG Light -->
-  <div class="bg-foreground">
-    <Container as="section" width="wide" variant="hero">
-      <Text as="h1" variant="hero">Our Strategy</Text>
-    </Container>
-    <Image
-      src={bgPlants}
-      alt={"background image of prairiegrass plants"}
-      priority
-    />
-  </div>
+	<!-- BG Light -->
+	<div class="bg-foreground">
+		<Container as="section" width="wide" variant="hero">
+			<Text as="h1" variant="hero">Our Strategy</Text>
+		</Container>
+		<Image
+			src={bgPlants}
+			alt={"background image of prairiegrass plants"}
+			priority
+		/>
+	</div>
 
-  <!-- BG Dark -->
-  <Image
-    src={bgRoots}
-    alt={"background image of prairiegrass roots"}
-    priority
-  />
+	<!-- BG Dark -->
+	<Image
+		src={bgRoots}
+		alt={"background image of prairiegrass roots"}
+		priority
+	/>
 
-  <Container as="section" width="wide">
-    <Text as={"h2"} variant={"subSubheading"} class="text-base">
-      We gather for monthly <a
-        href="#fellowship"
-        class="text-accent hover:text-accent/90 hover-underline-animation"
-      >
-        fellowship.
-      </a>
-    </Text>
-    <Text as={"h2"} variant={"subSubheading"}>
-      We host a summer pastoral <a
-        href="#internship"
-        class="text-accent hover:text-accent/90 hover-underline-animation"
-      >
-        internship.
-      </a>
-    </Text>
-    <Text as={"h2"} variant={"subSubheading"}>
-      We provide extended pastoral training through <a
-        href="#residency"
-        class="text-accent hover:text-accent/90 hover-underline-animation"
-      >
-        residencies.
-      </a>
-    </Text>
-    <Text as={"h2"} variant={"subSubheading"}>
-      We hold periodic training events called <a
-        href="#events"
-        class="text-accent hover:text-accent/90 hover-underline-animation"
-      >
-        Prairie Fires.
-      </a>
-    </Text>
-  </Container>
+	<Container as="section" width="wide">
+		<Text as={"h2"} variant={"subSubheading"} class="text-base">
+			We gather for monthly
+			<a
+				href="#fellowship"
+				class="text-accent hover:text-accent/90 hover-underline-animation"
+			>
+				fellowship.
+			</a>
+		</Text>
+		<Text as={"h2"} variant={"subSubheading"}>
+			We host a summer pastoral
+			<a
+				href="#internship"
+				class="text-accent hover:text-accent/90 hover-underline-animation"
+			>
+				internship.
+			</a>
+		</Text>
+		<Text as={"h2"} variant={"subSubheading"}>
+			We provide extended pastoral training through
+			<a
+				href="#residency"
+				class="text-accent hover:text-accent/90 hover-underline-animation"
+			>
+				residencies.
+			</a>
+		</Text>
+		<Text as={"h2"} variant={"subSubheading"}>
+			We hold periodic training events called
+			<a
+				href="#events"
+				class="text-accent hover:text-accent/90 hover-underline-animation"
+			>
+				Prairie Fires.
+			</a>
+		</Text>
+	</Container>
 
-  <div class="bg-muted">
-    <Container as="section">
-      <Text
-        as={"h2"}
-        variant={"subheading"}
-        id="fellowship"
-        class="scroll-mt-nav pt-lg"
-        >We gather once a month for <span class="text-primary">
-          pastoral fellowship
-        </span> and strategic planning.</Text
-      >
-      <div class="flex flex-col gap-8 md:flex-row">
-        <div class="flex flex-col gap-8 md:order-2">
-          <p class="text-secondary">
-            {description}
-          </p>
-          <p class="text-secondary">
-            Join us at our next meeting: {parsedDate} at <a
-              href={url}
-              class="underline"
-            >
-              {location}.
-            </a>
-          </p>
-        </div>
-        <Image
-          src={fellowshipImg}
-          alt={"picture of men eating lunch together"}
-          class="w-full rounded-lg shadow-md md:order-1 md:w-2/3"
-        />
-      </div>
-    </Container>
-  </div>
+	<div class="bg-muted">
+		<Container as="section">
+			<Text
+				as={"h2"}
+				variant={"subheading"}
+				id="fellowship"
+				class="scroll-mt-nav pt-lg"
+				>We gather once a month for
+				<span class="text-primary"> pastoral fellowship </span>
+				and strategic planning.</Text
+			>
+			<div class="flex flex-col gap-8 md:flex-row">
+				<div class="flex flex-col gap-8 md:order-2">
+					<p class="text-secondary">
+						{description}
+					</p>
+					<p class="text-secondary">
+						Join us at our next meeting: {parsedDate} at
+						<a href={url} class="underline"> {location}. </a>
+					</p>
+				</div>
+				<Image
+					src={fellowshipImg}
+					alt={"picture of men eating lunch together"}
+					class="w-full rounded-lg shadow-md md:order-1 md:w-2/3"
+				/>
+			</div>
+		</Container>
+	</div>
 
-  <Container as="section">
-    <Text
-      as={"h2"}
-      variant={"subheading"}
-      id="internship"
-      class="scroll-mt-nav pt-lg"
-      >Our <span class="text-primary">summer internship</span> is all about catching
-      a Gospel Imaginary.</Text
-    >
-    <div class="flex flex-col gap-8 md:flex-row">
-      <p class="text-secondary md:order-2">
-        We want to give you a taste of our shared convictions and help you think
-        through further ministry training and partnership in Soutnern MN.
-      </p>
+	<Container as="section">
+		<Text
+			as={"h2"}
+			variant={"subheading"}
+			id="internship"
+			class="scroll-mt-nav pt-lg"
+			>Our <span class="text-primary">summer internship</span> is all about
+			catching a Gospel Imaginary.</Text
+		>
+		<div class="flex flex-col gap-8 md:flex-row">
+			<p class="text-secondary md:order-2">
+				We want to give you a taste of our shared convictions and help you think
+				through further ministry training and partnership in Soutnern MN.
+			</p>
 
-      <Image
-        src={internshipImg}
-        alt={"picture of summer interns"}
-        class="w-full rounded-lg shadow-md md:order-1 md:w-2/3"
-      />
-    </div>
-    <Text as={"h3"} variant={"subSubheading"}>The summer internship is</Text>
-    {internshipDescription.map((item, index) => <Card {item} {index} />)}
-    <Text as={"h3"} variant={"subSubheading"}
-      >Benefits of the summer internship</Text
-    >
-    {internshipBenefits.map((item, index) => <Card {item} {index} />)}
-    <Text as={"h3"} variant={"subSubheading"}>To Apply</Text>
-    <p class="text-secondary">
-      Contact pastor Tyler Mykkanen (pastor at Sojourners Church in Albert Lea)
-      at 507.391.9501 or <a
-        href="mailto:hello@prairieforge.org"
-        class="underline"
-      >
-        hello@prairieforge.org
-      </a>
-    </p>
-  </Container>
+			<Image
+				src={internshipImg}
+				alt={"picture of summer interns"}
+				class="w-full rounded-lg shadow-md md:order-1 md:w-2/3"
+			/>
+		</div>
+		<Text as={"h3"} variant={"subSubheading"}>The summer internship is</Text>
+		{internshipDescription.map((item, index) => <Card {item} {index} />)}
+		<Text as={"h3"} variant={"subSubheading"}
+			>Benefits of the summer internship</Text
+		>
+		{internshipBenefits.map((item, index) => <Card {item} {index} />)}
+		<Text as={"h3"} variant={"subSubheading"}>To Apply</Text>
+		<p class="text-secondary">
+			Contact pastor Tyler Mykkanen (pastor at Sojourners Church in Albert Lea)
+			at 507.391.9501 or
+			<a href="mailto:hello@prairieforge.org" class="underline">
+				hello@prairieforge.org
+			</a>
+		</p>
+	</Container>
 
-  <div class="bg-muted">
-    <Container as="section">
-      <Text
-        as={"h2"}
-        variant={"subheading"}
-        id="residency"
-        class="scroll-mt-nav pt-lg"
-        >We are building extended <span class="text-primary">
-          pastoral residencies.
-        </span></Text
-      >
-      <p class="text-secondary">
-        Stay in the loop by emailing us at <a
-          href="mailto:hello@prairieforge.org"
-          class="underline"
-        >
-          hello@prairieforge.org
-        </a>
-      </p>
-    </Container>
-  </div>
+	<div class="bg-muted">
+		<Container as="section">
+			<Text
+				as={"h2"}
+				variant={"subheading"}
+				id="residency"
+				class="scroll-mt-nav pt-lg"
+				>We are building extended
+				<span class="text-primary"> pastoral residencies. </span></Text
+			>
+			<p class="text-secondary">
+				Stay in the loop by emailing us at
+				<a href="mailto:hello@prairieforge.org" class="underline">
+					hello@prairieforge.org
+				</a>
+			</p>
+		</Container>
+	</div>
 
-  <Container as="section">
-    <Text
-      as={"h2"}
-      variant={"subheading"}
-      id="events"
-      class="scroll-mt-nav pt-lg"
-      >We host periodic training events called <span class="text-primary">
-        Prairie Fires.
-      </span></Text
-    >
-    <div class="flex flex-col gap-8 md:flex-row">
-      <p class="text-secondary md:order-2">
-        Stay in the loop by emailing us at <a
-          href="mailto:hello@prairieforge.org"
-          class="underline"
-        >
-          hello@prairieforge.org
-        </a>
-      </p>
+	<Container as="section">
+		<Text
+			as={"h2"}
+			variant={"subheading"}
+			id="events"
+			class="scroll-mt-nav pt-lg"
+			>We host periodic training events called
+			<span class="text-primary"> Prairie Fires. </span></Text
+		>
+		<div class="flex flex-col gap-8 md:flex-row">
+			<p class="text-secondary md:order-2">
+				Stay in the loop by emailing us at
+				<a href="mailto:hello@prairieforge.org" class="underline">
+					hello@prairieforge.org
+				</a>
+			</p>
 
-      <Image
-        src={eventImg}
-        alt={"picture of Big God youth event"}
-        class="w-full rounded-lg shadow-md md:order-1 md:w-2/3"
-      />
-    </div>
-  </Container>
+			<Image
+				src={eventImg}
+				alt={"picture of Big God youth event"}
+				class="w-full rounded-lg shadow-md md:order-1 md:w-2/3"
+			/>
+		</div>
+	</Container>
 </Layout>

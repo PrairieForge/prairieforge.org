@@ -1,51 +1,53 @@
 ---
-import { type CollectionEntry } from "astro:content";
+import type { CollectionEntry } from 'astro:content';
 
 interface Props {
-  data: CollectionEntry<"churches">[];
-  fullscreen?: boolean;
+	data: CollectionEntry<'churches'>[];
+	fullscreen?: boolean;
 }
 
 const { data } = Astro.props;
 ---
 
 <div
-  id="hs-grayscale-leaflet"
-  class="hs-leaflet z-1 h-[20rem] w-full rounded-lg sm:h-[24rem] md:h-[32rem]"
-  data-markers={JSON.stringify(data)}
->
-</div>
+	id="hs-grayscale-leaflet"
+	class="hs-leaflet z-1 h-80 w-full rounded-lg sm:h-96 md:h-128"
+	data-markers={JSON.stringify(data)}
+></div>
 
 <script>
-  import type { CollectionEntry } from "astro:content";
+import type { CollectionEntry } from 'astro:content';
 
-  import { addMarker, initMap } from "#/lib/map";
+import { addMarker, initMap } from '#/lib/map';
 
-  // Initialize map
-  const map = initMap();
+// Initialize map
+const map = initMap();
 
-  // Get map data
-  let dataString = document.getElementById("hs-grayscale-leaflet")!.dataset
-    .markers;
+// Get map data
+const dataString = document.getElementById('hs-grayscale-leaflet')?.dataset
+	.markers;
 
-  let data;
-  if (dataString) {
-    data = JSON.parse(dataString) as CollectionEntry<"churches">[];
-  }
+// BUG: Double check parsing
+// let data;
+// if (dataString) {
+// 	data = JSON.parse(dataString) as CollectionEntry<'churches'>[];
+// }
+//
+const data = JSON.parse(dataString ?? '') as CollectionEntry<'churches'>[];
 
-  // Create popup for each data item
-  if (data) {
-    data.forEach((item) => {
-      addMarker(item).addTo(map);
-    });
-  }
+// Create popup for each data item
+if (data) {
+	data.forEach((item) => {
+		addMarker(item).addTo(map);
+	});
+}
 
-  // Adjust zoom for mobile
-  let width = document.documentElement.clientWidth;
-  console.log("width: ", width);
-  if (width < 600) {
-    map.setZoom(6);
-  } else {
-    map.setZoom(7);
-  }
+// Adjust zoom for mobile
+const width = document.documentElement.clientWidth;
+console.log('width: ', width);
+if (width < 600) {
+	map.setZoom(6);
+} else {
+	map.setZoom(7);
+}
 </script>

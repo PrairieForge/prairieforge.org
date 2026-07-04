@@ -1,54 +1,53 @@
 ---
-import { Menu, X } from "@lucide/astro";
+import { Menu, X } from '@lucide/astro';
 
-import { navItems } from "#/data/nav";
+import { navItems } from '#/data/nav';
 ---
 
 <!-- Use group and group-has-checked to toggle menu icon / checkbox / menu | https://tailwindcss.com/docs/hover-focus-and-other-states#styling-based-on-the-descendants-of-a-group | https://youtu.be/8eFeIFKAKHw?si=bTKM55MwRC8z5e2c -->
 <nav
-  class="group text-background sticky top-0 z-50 flex h-20 items-center justify-end px-4 md:backdrop-blur-md"
+	class="group text-background sticky top-0 z-50 flex h-20 items-center justify-end px-4 md:backdrop-blur-md"
 >
-  <input type="checkbox" id="sidebar-toggle" class="hidden" />
-  <div class="relative z-50 size-10 md:hidden">
-    <label for="sidebar-toggle" class="absolute">
-      <div
-        class="bg-foreground/90 size-10 rounded-md p-2 group-has-checked:bg-transparent"
-      >
-        <Menu
-          class="transition-all duration-300 ease-out group-has-checked:scale-0 group-has-checked:rotate-90"
-        />
-      </div>
-    </label>
-    <label for="sidebar-toggle" class="absolute">
-      <X
-        class="text-foreground size-10 scale-0 rotate-90 p-2 transition-all duration-300 ease-out group-has-checked:scale-100 group-has-checked:rotate-0"
-      />
-    </label>
-  </div>
+	<input type="checkbox" id="sidebar-toggle" class="hidden">
+	<div class="relative z-50 size-10 md:hidden">
+		<label for="sidebar-toggle" class="absolute" aria-label="sidebar toggle">
+			<div
+				class="bg-foreground/90 size-10 rounded-md p-2 group-has-checked:bg-transparent"
+			>
+				<Menu
+					class="transition-all duration-300 ease-out group-has-checked:scale-0 group-has-checked:rotate-90"
+				/>
+			</div>
+		</label>
+		<label for="sidebar-toggle" class="absolute" aria-label="sidebar toggle">
+			<X
+				class="text-foreground size-10 scale-0 rotate-90 p-2 transition-all duration-300 ease-out group-has-checked:scale-100 group-has-checked:rotate-0"
+			/>
+		</label>
+	</div>
 
-  <div
-    class="bg-background text-foreground md:text-background fixed inset-0 z-40 flex h-full translate-x-full flex-col items-center justify-center transition-all duration-200 ease-out group-has-checked:translate-none max-md:gap-4 md:relative md:w-full md:translate-none md:flex-row md:bg-transparent"
-  >
-    <!-- <h1>The current URL is: {Astro.url}</h1> -->
-    <!-- <h1>
+	<div
+		class="bg-background text-foreground md:text-background fixed inset-0 z-40 flex h-full translate-x-full flex-col items-center justify-center transition-all duration-200 ease-out group-has-checked:translate-none max-md:gap-4 md:relative md:w-full md:translate-none md:flex-row md:bg-transparent"
+	>
+		<!-- <h1>The current URL is: {Astro.url}</h1> -->
+		<!-- <h1>
       The current URL pathname is: {`/${Astro.url.pathname.split("/")[1]}`}
     </h1> -->
-    <ul
-      class="flex flex-col font-sans tracking-wider max-md:text-2xl md:flex-row"
-    >
-      <li class="flex justify-center">
-        <a
-          href="/"
-          onclick="document.getElementById('sidebar-toggle').checked = false"
-          class:list={[
+		<ul
+			class="flex flex-col font-sans tracking-wider max-md:text-2xl md:flex-row"
+		>
+			<li class="flex justify-center">
+				<a
+					href="/"
+					onclick="document.getElementById('sidebar-toggle').checked = false"
+					class:list={[
             "hover-underline-animation rounded-lg px-4 py-2 text-center max-md:text-6xl",
           ]}
-        >
-          <h1>The Prairie Forge Initiative</h1>
-        </a>
-      </li>
-      {
-        navItems.map((item) => (
+				>
+					<h1>The Prairie Forge Initiative</h1>
+				</a>
+			</li>
+			{navItems.map((item) => (
           <li class="flex justify-center">
             <a
               href={item.url}
@@ -62,86 +61,85 @@ import { navItems } from "#/data/nav";
               {item.label}
             </a>
           </li>
-        ))
-      }
-    </ul>
-  </div>
+        ))}
+		</ul>
+	</div>
 </nav>
 
 <style>
-  body:has(#vision:target),
-  body:has(#vision-2:target),
-  body:has(#vision-3:target),
-  body:has(#vision-4:target) {
-    nav a[href$="#vision"] {
-      color: var(--color-accent);
-      background-color: color-mix(
-        in srgb,
-        var(--color-background) 90%,
-        transparent
-      );
-    }
-  }
+body:has(#vision:target),
+body:has(#vision-2:target),
+body:has(#vision-3:target),
+body:has(#vision-4:target) {
+	nav a[href$="#vision"] {
+		color: var(--color-accent);
+		background-color: color-mix(
+			in srgb,
+			var(--color-background) 90%,
+			transparent
+		);
+	}
+}
 
-  .hover-underline-animation {
-    display: inline-block;
-    position: relative;
-  }
+.hover-underline-animation {
+	display: inline-block;
+	position: relative;
+}
 
-  .hover-underline-animation::after {
-    content: "";
-    position: absolute;
-    width: calc(100% - 2rem);
-    height: 2px;
-    bottom: 0.5rem;
-    left: 1rem;
-    background-color: var(--color-accent);
+.hover-underline-animation::after {
+	content: "";
+	position: absolute;
+	width: calc(100% - 2rem);
+	height: 2px;
+	bottom: 0.5rem;
+	left: 1rem;
+	background-color: var(--color-accent);
 
-    transform: scaleX(0);
-    transform-origin: bottom left;
-    transition: transform 0.25s ease-out;
-  }
+	transform: scaleX(0);
+	transform-origin: bottom left;
+	transition: transform 0.25s ease-out;
+}
 
-  .hover-underline-animation:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
+.hover-underline-animation:hover::after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
+}
 
-  nav::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: var(--color-foreground);
-    opacity: 1;
-    z-index: -1;
-  }
+nav::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-color: var(--color-foreground);
+	opacity: 1;
+	z-index: -1;
+}
 
-  @supports (animation-timeline: scroll()) {
-    nav::before {
-      animation: fade linear;
-      animation-timeline: scroll();
-      animation-range: 100px 300px;
-      animation-fill-mode: both;
-    }
+@supports (animation-timeline: scroll()) {
+	nav::before {
+		animation: fade linear;
+		animation-timeline: scroll();
+		animation-range: 100px 300px;
+		animation-fill-mode: both;
+	}
 
-    @keyframes fade {
-      from {
-        opacity: 1;
-      }
-      to {
-        opacity: 0;
-      }
-    }
+	@keyframes fade {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
+		}
+	}
 
-    @media (width >= 48rem /* 768px */) {
-      @keyframes fade {
-        from {
-          opacity: 1;
-        }
-        to {
-          opacity: 0.9;
-        }
-      }
-    }
-  }
+	@media (width >= 48rem /* 768px */) {
+		@keyframes fade {
+			from {
+				opacity: 1;
+			}
+			to {
+				opacity: 0.9;
+			}
+		}
+	}
+}
 </style>

@@ -1,130 +1,128 @@
 ---
-import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
 
-import bgPlants from "#/assets/bg-plants.webp";
-import bgRoots from "#/assets/bg-roots.webp";
-import Container from "#/components/Container.astro";
-import Map from "#/components/Map.astro";
-import Text from "#/components/Text.astro";
-import Layout from "#/layouts/Layout.astro";
-import { sortByKey } from "#/lib/utils";
+import bgPlants from '#/assets/bg-plants.webp';
+import bgRoots from '#/assets/bg-roots.webp';
+import Container from '#/components/Container.astro';
+import MapComponent from '#/components/Map.astro';
+import Text from '#/components/Text.astro';
+import Layout from '#/layouts/Layout.astro';
+import { sortByKey } from '#/lib/utils';
 
-const churches = (await getCollection("churches")).sort(sortByKey("name"));
-const friends = (await getCollection("friends")).sort(sortByKey("name"));
+const churches = (await getCollection('churches')).sort(sortByKey('name'));
+const friends = (await getCollection('friends')).sort(sortByKey('name'));
 ---
 
 <Layout>
-  <!-- BG Light -->
-  <div class="bg-foreground">
-    <Container as="section" width="wide" variant="hero">
-      <Text as="h1" variant="hero">About Us</Text>
-    </Container>
-    <Image
-      src={bgPlants}
-      alt={"background image of prairiegrass plants"}
-      priority
-    />
-  </div>
+	<!-- BG Light -->
+	<div class="bg-foreground">
+		<Container as="section" width="wide" variant="hero">
+			<Text as="h1" variant="hero">About Us</Text>
+		</Container>
+		<Image
+			src={bgPlants}
+			alt={"background image of prairiegrass plants"}
+			priority
+		/>
+	</div>
 
-  <!-- BG Dark -->
-  <Image
-    src={bgRoots}
-    alt={"background image of prairiegrass roots"}
-    priority
-  />
+	<!-- BG Dark -->
+	<Image
+		src={bgRoots}
+		alt={"background image of prairiegrass roots"}
+		priority
+	/>
 
-  <Container as="section">
-    <Text as={"h2"} variant={"subSubheading"} class="text-base">
-      We are a group of <a
-        href="#map"
-        class="text-primary hover:text-primary/90 hover-underline-animation"
-      >
-        like-minded churches,
-      </a> partnered with one another and with other
-      <a
-        href="#friends"
-        class="text-primary hover:text-primary/90 hover-underline-animation"
-      >
-        trusted organizations
-      </a> to plant the gospel deep in the soil of Southern Minnesota over the next
-      hundred years. We'd love for you to
-      <a
-        href="#join"
-        class="text-primary hover:text-primary/90 hover-underline-animation"
-      >
-        join us!
-      </a>
-    </Text>
-  </Container>
+	<Container as="section">
+		<Text as={"h2"} variant={"subSubheading"} class="text-base">
+			We are a group of
+			<a
+				href="#map"
+				class="text-primary hover:text-primary/90 hover-underline-animation"
+			>
+				like-minded churches,
+			</a>
+			partnered with one another and with other
+			<a
+				href="#friends"
+				class="text-primary hover:text-primary/90 hover-underline-animation"
+			>
+				trusted organizations
+			</a>
+			to plant the gospel deep in the soil of Southern Minnesota over the next
+			hundred years. We'd love for you to
+			<a
+				href="#join"
+				class="text-primary hover:text-primary/90 hover-underline-animation"
+			>
+				join us!
+			</a>
+		</Text>
+	</Container>
 
-  <Container as="section">
-    <Text
-      as={"h2"}
-      variant={"subSubheading"}
-      class="text-base"
-      id="map"
-      class="scroll-mt-nav pt-lg"
-    >
-      Partner Churches
-    </Text>
-    <Map data={churches} />
-    <ul class="text-secondary">
-      {
-        churches.map(({ data: { name, url, city } }) => (
+	<Container as="section">
+		<Text
+			as={"h2"}
+			variant={"subSubheading"}
+			id="map"
+			class="text-base scroll-mt-nav pt-lg"
+		>
+			Partner Churches
+		</Text>
+		<MapComponent data={churches} />
+		<ul class="text-secondary">
+			{churches.map(({ data: { name, url, city } }) => (
           <li>
-            <a href={url} class="underline" target="_blank">
+            <a href={url} class="underline" target="_blank" rel="noopener">
               {name} ({city})
             </a>
           </li>
-        ))
-      }
-    </ul>
-  </Container>
+        ))}
+		</ul>
+	</Container>
 
-  <Container as="section">
-    <Text
-      as={"h2"}
-      variant={"subSubheading"}
-      id="friends"
-      class="scroll-mt-nav pt-lg text-base">Friends of Prairie Forge</Text
-    >
-    <ul class="text-secondary">
-      {
-        friends.map(({ data: { name, url } }) => (
+	<Container as="section">
+		<Text
+			as={"h2"}
+			variant={"subSubheading"}
+			id="friends"
+			class="scroll-mt-nav pt-lg text-base"
+			>Friends of Prairie Forge</Text
+		>
+		<ul class="text-secondary">
+			{friends.map(({ data: { name, url } }) => (
           <li>
-            <a href={url} class="underline" target="_blank">
+            <a href={url} class="underline" target="_blank" rel="noopener">
               {name}
             </a>
           </li>
-        ))
-      }
-    </ul>
-  </Container>
+        ))}
+		</ul>
+	</Container>
 
-  <Container as="section">
-    <Text
-      as={"h2"}
-      variant={"subSubheading"}
-      id="join"
-      class="scroll-mt-nav pt-lg text-base">How to join</Text
-    >
-    <p class="text-secondary">
-      We are developing a more formal joining process. For now, contact us at <a
-        href="mailto:hello@prairieforge.org"
-        class="underline"
-      >
-        hello@prairieforge.org
-      </a> for more info
-    </p>
-    <p class="text-secondary">
-      Download our constitution <a
-        href="https://drive.google.com/file/d/1vXCbituyjTGai8Z5pvvU_TvCs4Jq2F6n/view?usp=sharing"
-        class="underline"
-        target="_blank"
-      >
-        here.
-      </a>
-    </p>
-  </Container>
+	<Container as="section">
+		<Text
+			as={"h2"}
+			variant={"subSubheading"}
+			id="join"
+			class="scroll-mt-nav pt-lg text-base"
+			>How to join</Text
+		>
+		<p class="text-secondary">
+			We are developing a more formal joining process. For now, contact us at
+			<a href="mailto:hello@prairieforge.org" class="underline">
+				hello@prairieforge.org
+			</a>
+			for more info
+		</p>
+		<p class="text-secondary">
+			<a
+				href="https://drive.google.com/file/d/1vXCbituyjTGai8Z5pvvU_TvCs4Jq2F6n/view?usp=sharing"
+				class="underline"
+				target="_blank"
+				>Download our constitution here.
+			</a>
+		</p>
+	</Container>
 </Layout>

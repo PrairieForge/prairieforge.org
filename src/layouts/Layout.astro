@@ -1,44 +1,45 @@
 ---
-import "#/styles/global.css";
+import '#/styles/global.css';
 
-import { Font } from "astro:assets";
+import { Font } from 'astro:assets';
 
-import Footer from "#/layouts/Footer.astro";
-import Nav from "#/layouts/Nav.astro";
+import Footer from '#/layouts/Footer.astro';
+import Nav from '#/layouts/Nav.astro';
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
 
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="PFI" />
-    <link rel="manifest" href="/site.webmanifest" />
+		<link rel="sitemap" href="/sitemap-index.xml">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<meta name="apple-mobile-web-app-title" content="PFI">
+		<link rel="manifest" href="/site.webmanifest">
 
-    <meta name="generator" content={Astro.generator} />
-    <title>Prairie Forge Initiative</title>
+		<meta name="generator" content={Astro.generator}>
+		<title>Prairie Forge Initiative</title>
 
-    <Font cssVariable="--font-sans" preload />
-    <Font cssVariable="--font-serif" preload />
-  </head>
-  <body>
-    <Nav />
-    <main>
-      <slot />
-    </main>
-    <Footer />
-  </body>
+		<Font cssVariable="--font-sans" preload />
+		<Font cssVariable="--font-serif" preload />
+	</head>
+	<body>
+		<Nav />
+		<main>
+			<slot />
+		</main>
+		<Footer />
+	</body>
 </html>
 
 <style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-  }
+html,
+body {
+	margin: 0;
+	width: 100%;
+}
 </style>
