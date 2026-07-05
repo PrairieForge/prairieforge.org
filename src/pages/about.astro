@@ -36,22 +36,22 @@ const friends = (await getCollection('friends')).sort(sortByKey('name'));
 
 	<Container as="section">
 		<Text as={"h2"} variant={"subSubheading"} class="text-base">
-			We are a group of
+			We are a group of{' '}
 			<a
 				href="#map"
 				class="text-primary hover:text-primary/90 hover-underline-animation"
 			>
 				like-minded churches,
 			</a>
-			partnered with one another and with other
+			{' '}partnered with one another and with other{' '}
 			<a
 				href="#friends"
 				class="text-primary hover:text-primary/90 hover-underline-animation"
 			>
 				trusted organizations
 			</a>
-			to plant the gospel deep in the soil of Southern Minnesota over the next
-			hundred years. We'd love for you to
+			{' '}to plant the gospel deep in the soil of Southern Minnesota over the
+			next hundred years. We'd love for you to{' '}
 			<a
 				href="#join"
 				class="text-primary hover:text-primary/90 hover-underline-animation"
@@ -110,10 +110,10 @@ const friends = (await getCollection('friends')).sort(sortByKey('name'));
 			>How to join</Text
 		>
 		<p class="text-secondary">
-			We are developing a more formal joining process. For now, contact us at
+			We are developing a more formal joining process. For now, contact us at{' '}
 			<a href="mailto:hello@prairieforge.org" class="underline">
 				hello@prairieforge.org
-			</a>
+			</a>{' '}
 			for more info
 		</p>
 		<p class="text-secondary">
